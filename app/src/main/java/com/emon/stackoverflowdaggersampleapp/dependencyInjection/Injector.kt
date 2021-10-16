@@ -11,17 +11,6 @@ import java.lang.reflect.Field
 
 class Injector(private  var presentationCompositionRoot: PresentationCompositionRoot) {
 
-//    fun inject(activity:QuestionListActivity){
-//        activity.viewModel= QuestionViewModel(presentationCompositionRoot.repository)
-//        activity.screensNavigator= ScreensNavigator(activity)
-//        activity.dialogsNavigator= DialogsNavigator(presentationCompositionRoot.fragmentManager)
-//    }
-//    fun inject(activity:QuestionDetailsActivity){
-//        activity.viewModel= QuestionViewModel(presentationCompositionRoot.repository)
-//        activity.screensNavigator= ScreensNavigator(activity)
-//        activity.dialogsNavigator= DialogsNavigator(presentationCompositionRoot.fragmentManager)
-//    }
-
     fun inject(client: Any) {
         for (field in getAllFields(client)) {
             if (isAnnotatedForInjection(field)) {
