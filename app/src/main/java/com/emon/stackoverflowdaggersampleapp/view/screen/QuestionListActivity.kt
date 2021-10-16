@@ -18,7 +18,9 @@ import com.emon.stackoverflowdaggersampleapp.rest.Resource.Companion.STATUS_SUCC
 import com.emon.stackoverflowdaggersampleapp.rest.RestRepository
 import com.emon.stackoverflowdaggersampleapp.rest.StackoverflowApi
 import com.emon.stackoverflowdaggersampleapp.view.adapter.QuestionListAdapter
+import com.emon.stackoverflowdaggersampleapp.view.dialog.DialogsNavigator
 import com.emon.stackoverflowdaggersampleapp.view.dialog.ServerErrorDialogFragment
+import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigator
 import com.emon.stackoverflowdaggersampleapp.viewModel.QuestionViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -32,11 +34,16 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
 
     private lateinit var adapter: QuestionListAdapter
 
+    private lateinit var dialogsNavigator: DialogsNavigator
+
+    private lateinit var screensNavigator: ScreensNavigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_question_list)
 
-
+        dialogsNavigator= DialogsNavigator(supportFragmentManager)
+        screensNavigator= ScreensNavigator(this)
 
         viewModel = QuestionViewModel(repository)
 
@@ -53,7 +60,7 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
                 }
                 STATUS_ERROR -> {
                     binding.progressCircular.visibility = GONE
-                    showNetworkErrorDialog()
+                    dialogsNavigator.showNetworkErrorDialog()
                 }
             }
         })
@@ -67,16 +74,16 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
         }
     }
 
-    fun showNetworkErrorDialog(){
-        supportFragmentManager.beginTransaction()
-                .add(ServerErrorDialogFragment.newInstance(), null)
-                .commitAllowingStateLoss()
-    }
+
 
     override fun goToQuestionDetails(id: String) {
-        var intent = Intent(this, QuestionDetailsActivity::class.java).also { it.putExtra("question_id", id) }
-        startActivity(intent)
+       screensNavigator.goToScreenDetails(id)
     }
+
+    override fun onBackPressed() {
+        screensNavigator.handleBackPress()
+    }
+
 }
 
 interface ItemClickListener {

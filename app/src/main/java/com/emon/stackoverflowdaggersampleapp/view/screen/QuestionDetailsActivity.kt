@@ -17,7 +17,9 @@ import com.emon.stackoverflowdaggersampleapp.rest.Resource.Companion.STATUS_LOAD
 import com.emon.stackoverflowdaggersampleapp.rest.Resource.Companion.STATUS_SUCCESS
 import com.emon.stackoverflowdaggersampleapp.rest.RestRepository
 import com.emon.stackoverflowdaggersampleapp.rest.StackoverflowApi
+import com.emon.stackoverflowdaggersampleapp.view.dialog.DialogsNavigator
 import com.emon.stackoverflowdaggersampleapp.view.dialog.ServerErrorDialogFragment
+import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigator
 import com.emon.stackoverflowdaggersampleapp.viewModel.QuestionViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -31,9 +33,17 @@ class QuestionDetailsActivity : BaseActivity() {
 
     private lateinit var viewModel: QuestionViewModel
 
+    private lateinit var dialogsNavigator:DialogsNavigator
+    private lateinit var screensNavigator: ScreensNavigator
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=DataBindingUtil.setContentView(this,R.layout.activity_question_details)
+
+        dialogsNavigator= DialogsNavigator(supportFragmentManager)
+        screensNavigator= ScreensNavigator(this)
 
         viewModel= QuestionViewModel(repository)
         questionId=intent.getStringExtra("question_id")!!
@@ -53,7 +63,7 @@ class QuestionDetailsActivity : BaseActivity() {
                 }
                 STATUS_ERROR->{
                     binding.progressCircular.visibility=GONE
-                    showNetworkErrorDialog()
+                    dialogsNavigator.showNetworkErrorDialog()
                 }
             }
         })
@@ -67,9 +77,8 @@ class QuestionDetailsActivity : BaseActivity() {
         }
     }
 
-    fun showNetworkErrorDialog(){
-        supportFragmentManager.beginTransaction()
-            .add(ServerErrorDialogFragment.newInstance(), null)
-            .commitAllowingStateLoss()
+    override fun onBackPressed() {
+        screensNavigator.handleBackPress()
     }
+
 }
