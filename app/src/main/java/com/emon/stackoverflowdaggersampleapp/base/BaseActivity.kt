@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.emon.stackoverflowdaggersampleapp.composition.ActivityCompositionRoot
 import com.emon.stackoverflowdaggersampleapp.composition.AppCompositionRoot
 import com.emon.stackoverflowdaggersampleapp.composition.PresentationCompositionRoot
+import com.emon.stackoverflowdaggersampleapp.dependencyInjection.Injector
 import com.emon.stackoverflowdaggersampleapp.rest.RestRepository
 
 open class BaseActivity: AppCompatActivity() {
@@ -16,8 +17,15 @@ open class BaseActivity: AppCompatActivity() {
         ActivityCompositionRoot(appCompositionRoot,this,supportFragmentManager)
     }
 
-    protected  val compositionRoot by lazy {
+    private val compositionRoot by lazy {
         PresentationCompositionRoot(activityCompositionRoot)
+    }
+
+    protected lateinit var injector:Injector
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        injector=Injector(compositionRoot)
     }
 
 

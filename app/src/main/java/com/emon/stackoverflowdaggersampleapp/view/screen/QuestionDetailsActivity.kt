@@ -31,10 +31,10 @@ class QuestionDetailsActivity : BaseActivity() {
 
     private lateinit var binding:ActivityQuestionDetailsBinding
 
-    private lateinit var viewModel: QuestionViewModel
+    lateinit var viewModel: QuestionViewModel
 
-    private lateinit var dialogsNavigator:DialogsNavigator
-    private lateinit var screensNavigator: ScreensNavigator
+    lateinit var dialogsNavigator:DialogsNavigator
+    lateinit var screensNavigator: ScreensNavigator
 
 
 
@@ -42,10 +42,8 @@ class QuestionDetailsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding=DataBindingUtil.setContentView(this,R.layout.activity_question_details)
 
-        dialogsNavigator= compositionRoot.dialogsNavigator
-        screensNavigator= compositionRoot.screensNavigator
+        injector.inject(this)
 
-        viewModel= QuestionViewModel(compositionRoot.repository)
         questionId=intent.getStringExtra("question_id")!!
         viewModel.getQuestionBody().observe(this, Observer {
             when(it.status){

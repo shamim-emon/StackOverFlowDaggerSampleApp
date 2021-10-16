@@ -30,28 +30,24 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
 
     private lateinit var binding: ActivityQuestionListBinding
 
-    private lateinit var viewModel: QuestionViewModel
+    lateinit var viewModel: QuestionViewModel
 
     private lateinit var adapter: QuestionListAdapter
 
-    private lateinit var dialogsNavigator: DialogsNavigator
+    lateinit var dialogsNavigator: DialogsNavigator
 
-    private lateinit var screensNavigator: ScreensNavigator
+    lateinit var screensNavigator: ScreensNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_question_list)
 
-        dialogsNavigator= compositionRoot.dialogsNavigator
-        screensNavigator= compositionRoot.screensNavigator
-
-        viewModel = QuestionViewModel(compositionRoot.repository)
-
+        injector.inject(this)
         viewModel.getQuestionListSchema().observe(this, Observer {
             when (it.status) {
                 STATUS_SUCCESS -> {
                     binding.progressCircular.visibility = GONE
-                    adapter = QuestionListAdapter(it.data!!,this@QuestionListActivity)
+                    adapter = QuestionListAdapter(it.data!!, this@QuestionListActivity)
                     binding.rvQuestions.adapter = adapter
                     binding.rvQuestions.layoutManager = LinearLayoutManager(this)
                 }
@@ -75,9 +71,8 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
     }
 
 
-
     override fun goToQuestionDetails(id: String) {
-       screensNavigator.goToScreenDetails(id)
+        screensNavigator.goToScreenDetails(id)
     }
 
     override fun onBackPressed() {

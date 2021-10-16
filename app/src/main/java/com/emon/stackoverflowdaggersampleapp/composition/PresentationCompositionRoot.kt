@@ -11,5 +11,6 @@ class PresentationCompositionRoot(private val activityCompositionRoot: ActivityC
     var repository: RestRepository =activityCompositionRoot.repository
     var application=activityCompositionRoot.application
     var activity=activityCompositionRoot.activity
+    var fragmentManager=activityCompositionRoot.fragmentManager
 
 }
