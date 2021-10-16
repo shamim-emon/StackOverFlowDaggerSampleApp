@@ -9,5 +9,7 @@ class PresentationCompositionRoot(private val activityCompositionRoot: ActivityC
     var screensNavigator: ScreensNavigator = activityCompositionRoot.screensNavigator
     var dialogsNavigator: DialogsNavigator = activityCompositionRoot.dialogsNavigator
     var repository: RestRepository =activityCompositionRoot.repository
+    var application=activityCompositionRoot.application
+    var activity=activityCompositionRoot.activity
 
 }

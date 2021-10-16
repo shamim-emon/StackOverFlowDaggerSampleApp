@@ -8,7 +8,7 @@ import com.emon.stackoverflowdaggersampleapp.rest.StackoverflowApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class AppCompositionRoot() {
+class AppCompositionRoot(val application: Application) {
 
     private  val retrofit by lazy {
         Retrofit.Builder()

@@ -11,6 +11,7 @@ class ActivityCompositionRoot(private val appCompositionRoot: AppCompositionRoot
     var screensNavigator: ScreensNavigator = ScreensNavigator(activity)
     var dialogsNavigator: DialogsNavigator = DialogsNavigator(fragmentManager)
     var repository:RestRepository=appCompositionRoot.repository
+    var application=appCompositionRoot.application
 
 
 }

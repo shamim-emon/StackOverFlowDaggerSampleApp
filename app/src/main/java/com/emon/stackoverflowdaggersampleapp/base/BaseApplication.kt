@@ -8,6 +8,6 @@ class BaseApplication :Application() {
     lateinit var appCompositionRoot: AppCompositionRoot
     override fun onCreate() {
         super.onCreate()
-        appCompositionRoot=AppCompositionRoot()
+        appCompositionRoot=AppCompositionRoot(this)
     }
 }
