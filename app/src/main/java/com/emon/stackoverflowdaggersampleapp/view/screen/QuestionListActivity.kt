@@ -45,7 +45,7 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
         dialogsNavigator= DialogsNavigator(supportFragmentManager)
         screensNavigator= ScreensNavigator(this)
 
-        viewModel = QuestionViewModel(repository)
+        viewModel = QuestionViewModel(compositionRoot.repository)
 
         viewModel.getQuestionListSchema().observe(this, Observer {
             when (it.status) {

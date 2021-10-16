@@ -45,7 +45,7 @@ class QuestionDetailsActivity : BaseActivity() {
         dialogsNavigator= DialogsNavigator(supportFragmentManager)
         screensNavigator= ScreensNavigator(this)
 
-        viewModel= QuestionViewModel(repository)
+        viewModel= QuestionViewModel(compositionRoot.repository)
         questionId=intent.getStringExtra("question_id")!!
         viewModel.getQuestionBody().observe(this, Observer {
             when(it.status){
