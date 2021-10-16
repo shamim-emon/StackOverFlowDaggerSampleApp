@@ -12,6 +12,7 @@ import com.emon.stackoverflowdaggersampleapp.R
 import com.emon.stackoverflowdaggersampleapp.base.BaseActivity
 import com.emon.stackoverflowdaggersampleapp.data.Constants
 import com.emon.stackoverflowdaggersampleapp.databinding.ActivityQuestionListBinding
+import com.emon.stackoverflowdaggersampleapp.dependencyInjection.Service
 import com.emon.stackoverflowdaggersampleapp.rest.Resource.Companion.STATUS_ERROR
 import com.emon.stackoverflowdaggersampleapp.rest.Resource.Companion.STATUS_LOADING
 import com.emon.stackoverflowdaggersampleapp.rest.Resource.Companion.STATUS_SUCCESS
@@ -30,19 +31,21 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
 
     private lateinit var binding: ActivityQuestionListBinding
 
-    lateinit var viewModel: QuestionViewModel
+    private lateinit var viewModel: QuestionViewModel
+    @field:Service private lateinit var repository:RestRepository
 
     private lateinit var adapter: QuestionListAdapter
 
-    lateinit var dialogsNavigator: DialogsNavigator
+    @field:Service private  lateinit var dialogsNavigator: DialogsNavigator
 
-    lateinit var screensNavigator: ScreensNavigator
+    @field:Service private  lateinit var screensNavigator: ScreensNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_question_list)
 
         injector.inject(this)
+        viewModel=QuestionViewModel(repository)
         viewModel.getQuestionListSchema().observe(this, Observer {
             when (it.status) {
                 STATUS_SUCCESS -> {

@@ -12,6 +12,7 @@ import com.emon.stackoverflowdaggersampleapp.R
 import com.emon.stackoverflowdaggersampleapp.base.BaseActivity
 import com.emon.stackoverflowdaggersampleapp.data.Constants
 import com.emon.stackoverflowdaggersampleapp.databinding.ActivityQuestionDetailsBinding
+import com.emon.stackoverflowdaggersampleapp.dependencyInjection.Service
 import com.emon.stackoverflowdaggersampleapp.rest.Resource.Companion.STATUS_ERROR
 import com.emon.stackoverflowdaggersampleapp.rest.Resource.Companion.STATUS_LOADING
 import com.emon.stackoverflowdaggersampleapp.rest.Resource.Companion.STATUS_SUCCESS
@@ -31,10 +32,11 @@ class QuestionDetailsActivity : BaseActivity() {
 
     private lateinit var binding:ActivityQuestionDetailsBinding
 
-    lateinit var viewModel: QuestionViewModel
+    private  lateinit var viewModel: QuestionViewModel
 
-    lateinit var dialogsNavigator:DialogsNavigator
-    lateinit var screensNavigator: ScreensNavigator
+    @field:Service private lateinit var restRepository: RestRepository
+    @field:Service private  lateinit var dialogsNavigator:DialogsNavigator
+    @field:Service private  lateinit var screensNavigator: ScreensNavigator
 
 
 
@@ -45,6 +47,7 @@ class QuestionDetailsActivity : BaseActivity() {
         injector.inject(this)
 
         questionId=intent.getStringExtra("question_id")!!
+        viewModel=QuestionViewModel(restRepository)
         viewModel.getQuestionBody().observe(this, Observer {
             when(it.status){
                 STATUS_SUCCESS->{
