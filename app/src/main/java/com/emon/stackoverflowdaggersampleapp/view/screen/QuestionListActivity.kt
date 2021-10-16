@@ -28,9 +28,6 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
 
     private lateinit var binding: ActivityQuestionListBinding
 
-    private lateinit var retrofit: Retrofit
-    private lateinit var stackOverflowApi: StackoverflowApi
-    private lateinit var repository: RestRepository
     private lateinit var viewModel: QuestionViewModel
 
     private lateinit var adapter: QuestionListAdapter
@@ -40,14 +37,7 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_question_list)
 
 
-        retrofit = Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
 
-        stackOverflowApi = retrofit.create(StackoverflowApi::class.java)
-
-        repository = RestRepository(stackOverflowApi)
         viewModel = QuestionViewModel(repository)
 
         viewModel.getQuestionListSchema().observe(this, Observer {

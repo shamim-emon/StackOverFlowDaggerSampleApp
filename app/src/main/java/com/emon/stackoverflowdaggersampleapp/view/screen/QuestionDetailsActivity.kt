@@ -29,23 +29,12 @@ class QuestionDetailsActivity : BaseActivity() {
 
     private lateinit var binding:ActivityQuestionDetailsBinding
 
-    private lateinit var retrofit: Retrofit
-    private lateinit  var stackOverflowApi: StackoverflowApi
-    private lateinit var repository: RestRepository
     private lateinit var viewModel: QuestionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=DataBindingUtil.setContentView(this,R.layout.activity_question_details)
 
-        retrofit= Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        stackOverflowApi=retrofit.create(StackoverflowApi::class.java)
-
-        repository= RestRepository(stackOverflowApi)
         viewModel= QuestionViewModel(repository)
         questionId=intent.getStringExtra("question_id")!!
         viewModel.getQuestionBody().observe(this, Observer {
