@@ -14,11 +14,7 @@ class AppCompositionRoot {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-    private lateinit var stackOverflowApi: StackoverflowApi
-    lateinit var repository: RestRepository
+    private var stackOverflowApi: StackoverflowApi = retrofit.create(StackoverflowApi::class.java)
+    var repository: RestRepository = RestRepository(stackOverflowApi)
 
-    init {
-        stackOverflowApi = retrofit.create(StackoverflowApi::class.java)
-        repository = RestRepository(stackOverflowApi)
-    }
 }

@@ -42,8 +42,8 @@ class QuestionDetailsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding=DataBindingUtil.setContentView(this,R.layout.activity_question_details)
 
-        dialogsNavigator= DialogsNavigator(supportFragmentManager)
-        screensNavigator= ScreensNavigator(this)
+        dialogsNavigator= compositionRoot.dialogsNavigator
+        screensNavigator= compositionRoot.screensNavigator
 
         viewModel= QuestionViewModel(compositionRoot.repository)
         questionId=intent.getStringExtra("question_id")!!

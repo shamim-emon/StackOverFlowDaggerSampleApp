@@ -42,8 +42,8 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_question_list)
 
-        dialogsNavigator= DialogsNavigator(supportFragmentManager)
-        screensNavigator= ScreensNavigator(this)
+        dialogsNavigator= compositionRoot.dialogsNavigator
+        screensNavigator= compositionRoot.screensNavigator
 
         viewModel = QuestionViewModel(compositionRoot.repository)
 
