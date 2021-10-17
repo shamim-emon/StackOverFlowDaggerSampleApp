@@ -7,10 +7,10 @@ import com.emon.stackoverflowdaggersampleapp.di.*
 open class BaseActivity: AppCompatActivity() {
 
     private  val  appCompositionRoot by lazy {
-        (application as BaseApplication).appCompositionRoot
+        (application as BaseApplication).appComponent
+
     }
     private val  activityCompositionRoot by lazy {
-        //ActivityModule(appCompositionRoot,this,supportFragmentManager)
         DaggerActivityComponent
             .builder()
             .activityModule(ActivityModule(appCompositionRoot,this,supportFragmentManager))
@@ -18,7 +18,6 @@ open class BaseActivity: AppCompatActivity() {
     }
 
     private val compositionRoot by lazy {
-        //PresentationModule(activityCompositionRoot)
         DaggerPresentationComponent
             .builder()
             .presentationModule(PresentationModule(activityCompositionRoot))

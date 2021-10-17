@@ -1,13 +1,15 @@
 package com.emon.stackoverflowdaggersampleapp.base
 
 import android.app.Application
-import com.emon.stackoverflowdaggersampleapp.di.AppCompositionRoot
+import com.emon.stackoverflowdaggersampleapp.di.AppComponent
+import com.emon.stackoverflowdaggersampleapp.di.AppModule
+import com.emon.stackoverflowdaggersampleapp.di.DaggerAppComponent
 
 class BaseApplication :Application() {
 
-    lateinit var appCompositionRoot: AppCompositionRoot
+    lateinit var appComponent: AppComponent
     override fun onCreate() {
         super.onCreate()
-        appCompositionRoot= AppCompositionRoot(this)
+        appComponent= DaggerAppComponent.builder().appModule(AppModule(this)).build()
     }
 }
