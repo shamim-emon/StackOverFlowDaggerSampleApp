@@ -1,15 +1,11 @@
-package com.emon.stackoverflowdaggersampleapp.dependencyInjection
+package com.emon.stackoverflowdaggersampleapp.di
 
-import com.emon.stackoverflowdaggersampleapp.composition.PresentationCompositionRoot
 import com.emon.stackoverflowdaggersampleapp.rest.RestRepository
 import com.emon.stackoverflowdaggersampleapp.view.dialog.DialogsNavigator
 import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigator
-import com.emon.stackoverflowdaggersampleapp.view.screen.QuestionDetailsActivity
-import com.emon.stackoverflowdaggersampleapp.view.screen.QuestionListActivity
-import com.emon.stackoverflowdaggersampleapp.viewModel.QuestionViewModel
 import java.lang.reflect.Field
 
-class Injector(private  var presentationCompositionRoot: PresentationCompositionRoot) {
+class Injector(private  var presentationComponent: PresentationComponent) {
 
     fun inject(client: Any) {
         for (field in getAllFields(client)) {
@@ -44,13 +40,13 @@ class Injector(private  var presentationCompositionRoot: PresentationComposition
     private fun getServiceForClass(type: Class<*>): Any {
         return when (type) {
             DialogsNavigator::class.java -> {
-                presentationCompositionRoot.dialogsNavigator
+                presentationComponent.provideDialogsNavigator()
             }
             ScreensNavigator::class.java -> {
-                presentationCompositionRoot.screensNavigator
+                presentationComponent.provideScreensNavigator()
             }
             RestRepository::class.java -> {
-                presentationCompositionRoot.repository
+                presentationComponent.provideRepository()
             }
             else -> {
                 throw Exception("unsupported service type: $type")

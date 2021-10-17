@@ -1,7 +1,6 @@
-package com.emon.stackoverflowdaggersampleapp.composition
+package com.emon.stackoverflowdaggersampleapp.di
 
 import android.app.Application
-import android.content.Context
 import com.emon.stackoverflowdaggersampleapp.data.Constants
 import com.emon.stackoverflowdaggersampleapp.rest.RestRepository
 import com.emon.stackoverflowdaggersampleapp.rest.StackoverflowApi

@@ -1,4 +1,4 @@
-package com.emon.stackoverflowdaggersampleapp.dependencyInjection
+package com.emon.stackoverflowdaggersampleapp.di
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
