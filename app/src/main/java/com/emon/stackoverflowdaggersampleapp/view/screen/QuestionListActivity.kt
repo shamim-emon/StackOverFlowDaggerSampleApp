@@ -20,22 +20,23 @@ import com.emon.stackoverflowdaggersampleapp.view.dialog.DialogsNavigator
 import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigator
 import com.emon.stackoverflowdaggersampleapp.viewModel.QuestionViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class QuestionListActivity : BaseActivity(), ItemClickListener {
 
     private lateinit var binding: ActivityQuestionListBinding
 
     private lateinit var viewModel: QuestionViewModel
-    @field:Service
-    private lateinit var repository:RestRepository
+    @Inject
+    lateinit var repository:RestRepository
 
     private lateinit var adapter: QuestionListAdapter
 
-    @field:Service
-    private  lateinit var dialogsNavigator: DialogsNavigator
+    @Inject
+    lateinit var dialogsNavigator: DialogsNavigator
 
-    @field:Service
-    private  lateinit var screensNavigator: ScreensNavigator
+    @Inject
+    lateinit var screensNavigator: ScreensNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

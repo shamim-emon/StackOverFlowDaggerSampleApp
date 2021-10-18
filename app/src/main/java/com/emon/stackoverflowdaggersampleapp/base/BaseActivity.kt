@@ -24,11 +24,11 @@ open class BaseActivity: AppCompatActivity() {
             .build()
     }
 
-    protected lateinit var injector: Injector
+    protected  val injector  get() = compositionRoot
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        injector= Injector(compositionRoot)
+
     }
 
 
