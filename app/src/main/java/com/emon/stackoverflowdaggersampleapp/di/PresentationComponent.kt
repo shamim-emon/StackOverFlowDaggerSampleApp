@@ -8,7 +8,7 @@ import com.emon.stackoverflowdaggersampleapp.view.screen.QuestionDetailsActivity
 import com.emon.stackoverflowdaggersampleapp.view.screen.QuestionListActivity
 import dagger.Component
 
-@Component(modules = [PresentationModule::class])
+@Component(dependencies = [ActivityComponent::class])
 interface PresentationComponent {
 
     fun inject(activity:QuestionListActivity)
