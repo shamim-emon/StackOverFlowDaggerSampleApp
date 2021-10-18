@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import com.emon.stackoverflowdaggersampleapp.R
 import com.emon.stackoverflowdaggersampleapp.base.BaseActivity
 import com.emon.stackoverflowdaggersampleapp.databinding.ActivityQuestionDetailsBinding
-import com.emon.stackoverflowdaggersampleapp.di.Service
 import com.emon.stackoverflowdaggersampleapp.rest.Resource.Companion.STATUS_ERROR
 import com.emon.stackoverflowdaggersampleapp.rest.Resource.Companion.STATUS_LOADING
 import com.emon.stackoverflowdaggersampleapp.rest.Resource.Companion.STATUS_SUCCESS

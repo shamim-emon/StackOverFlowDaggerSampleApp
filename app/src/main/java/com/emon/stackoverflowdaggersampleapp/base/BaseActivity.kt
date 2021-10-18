@@ -13,6 +13,7 @@ open class BaseActivity: AppCompatActivity() {
     private val  activityCompositionRoot by lazy {
         DaggerActivityComponent
             .builder()
+            .appComponent(appCompositionRoot)
             .activityModule(ActivityModule(appCompositionRoot,this,supportFragmentManager))
             .build()
     }

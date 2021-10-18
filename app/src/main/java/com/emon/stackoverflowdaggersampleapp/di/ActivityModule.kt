@@ -14,8 +14,8 @@ class ActivityModule(private val appComponent: AppComponent, private val activit
 
     @Provides fun provideScreensNavigator(): ScreensNavigator = ScreensNavigator(activity)
     @Provides fun provideDialogsNavigator(): DialogsNavigator = DialogsNavigator(fragmentManager)
-    @Provides fun provideRepository():RestRepository=appComponent.provideRestRepository()
-    @Provides fun provideApplication():Application=appComponent.provideApplication()
+   // @Provides fun provideRepository():RestRepository=appComponent.provideRestRepository()
+   // @Provides fun provideApplication():Application=appComponent.provideApplication()
     @Provides fun providesActivity()=activity
     @Provides fun providesFragmentManager()=fragmentManager
 

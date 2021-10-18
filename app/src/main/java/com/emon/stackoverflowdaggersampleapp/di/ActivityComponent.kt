@@ -7,8 +7,11 @@ import com.emon.stackoverflowdaggersampleapp.rest.RestRepository
 import com.emon.stackoverflowdaggersampleapp.view.dialog.DialogsNavigator
 import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigator
 import dagger.Component
+import javax.inject.Singleton
 
-@Component(modules = [ActivityModule::class])
+
+@ActivityScope
+@Component(modules = [ActivityModule::class],dependencies = [AppComponent::class])
 interface ActivityComponent {
     fun provideScreensNavigator(): ScreensNavigator
     fun providesDialogsNavigator(): DialogsNavigator
