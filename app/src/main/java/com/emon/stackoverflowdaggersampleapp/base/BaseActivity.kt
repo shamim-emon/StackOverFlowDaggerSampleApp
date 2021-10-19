@@ -19,10 +19,7 @@ open class BaseActivity: AppCompatActivity() {
     }
 
     private val compositionRoot by lazy {
-        DaggerPresentationComponent
-            .builder()
-            .activityComponent(activityCompositionRoot)
-            .build()
+        activityCompositionRoot.newPresentationComponent()
     }
 
     protected  val injector  get() = compositionRoot

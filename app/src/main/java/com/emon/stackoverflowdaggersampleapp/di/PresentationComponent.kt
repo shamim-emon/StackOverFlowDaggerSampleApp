@@ -7,10 +7,11 @@ import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigator
 import com.emon.stackoverflowdaggersampleapp.view.screen.QuestionDetailsActivity
 import com.emon.stackoverflowdaggersampleapp.view.screen.QuestionListActivity
 import dagger.Component
+import dagger.Subcomponent
 import javax.inject.Singleton
 
 @PresentationScope
-@Component(dependencies = [ActivityComponent::class])
+@Subcomponent
 interface PresentationComponent {
 
     fun inject(activity:QuestionListActivity)

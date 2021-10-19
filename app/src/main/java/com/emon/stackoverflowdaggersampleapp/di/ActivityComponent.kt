@@ -13,11 +13,6 @@ import javax.inject.Singleton
 @ActivityScope
 @Component(modules = [ActivityModule::class],dependencies = [AppComponent::class])
 interface ActivityComponent {
-    fun provideScreensNavigator(): ScreensNavigator
-    fun providesDialogsNavigator(): DialogsNavigator
-    fun providesRepository(): RestRepository
-    fun provideApplication(): Application
-    fun providesActivity():Activity
-    fun providesFragmentManager():FragmentManager
+      fun newPresentationComponent():PresentationComponent
 
 }
