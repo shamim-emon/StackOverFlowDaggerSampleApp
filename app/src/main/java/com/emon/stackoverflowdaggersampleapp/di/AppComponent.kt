@@ -10,9 +10,5 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [AppModule::class])
 interface AppComponent {
-    fun provideRetrofit(): Retrofit
-    fun provideStackOverFlowApi():StackoverflowApi
-    fun provideRestRepository():RestRepository
-    fun provideApplication():Application
-
+    fun newActivityComponent(activityModule: ActivityModule):ActivityComponent
 }
