@@ -11,7 +11,11 @@ open class BaseActivity: AppCompatActivity() {
 
     }
     private val  activityCompositionRoot by lazy {
-        appCompositionRoot.newActivityComponent(ActivityModule(this,supportFragmentManager))
+        appCompositionRoot
+                .newActivityComponentBuilder()
+                .fragmentManager(supportFragmentManager)
+                .activity(this)
+                .build()
     }
 
     private val compositionRoot by lazy {

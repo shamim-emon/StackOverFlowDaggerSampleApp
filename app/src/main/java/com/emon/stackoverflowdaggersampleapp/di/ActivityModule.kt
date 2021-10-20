@@ -10,12 +10,8 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ActivityModule(private val activity:Activity, private val fragmentManager: FragmentManager) {
-    @Provides fun provideScreensNavigator(): ScreensNavigator = ScreensNavigator(activity)
-    @Provides fun provideDialogsNavigator(): DialogsNavigator = DialogsNavigator(fragmentManager)
-    @Provides fun providesActivity()=activity
-    @Provides fun providesFragmentManager()=fragmentManager
+object ActivityModule {
 
-
-
+    @Provides fun provideScreensNavigator(activity:Activity): ScreensNavigator = ScreensNavigator(activity)
+    @Provides fun provideDialogsNavigator(fragmentManager: FragmentManager): DialogsNavigator = DialogsNavigator(fragmentManager)
 }

@@ -11,7 +11,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class AppModule(val application: Application) {
+object AppModule{
+
 
     @Singleton
     @Provides fun provideRetrofit():Retrofit{
@@ -22,8 +23,7 @@ class AppModule(val application: Application) {
     }
 
     @Provides fun provideStackOverFlowApi(retrofit: Retrofit)=retrofit.create(StackoverflowApi::class.java)
-
     @Provides fun provideRestRepository(stackoverflowApi: StackoverflowApi): RestRepository = RestRepository(stackoverflowApi)
-    @Provides fun provideApplication()=application
+//    @Provides fun provideApplication()=application
 
 }
