@@ -18,7 +18,6 @@ class QuestionViewModel(val repository: RestRepository) {
             var responseSchema = repository.fetchQuestionsListResponseSchema()
             questionListSchemaLiveData.postValue(Resource.success(responseSchema.body()!!.items))
         } catch (e: Exception) {
-            Log.e("Exception", e.localizedMessage)
             questionListSchemaLiveData.postValue(Resource.error(null))
         }
     }
