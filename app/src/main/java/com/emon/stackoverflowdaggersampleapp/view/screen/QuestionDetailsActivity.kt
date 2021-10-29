@@ -17,6 +17,7 @@ import com.emon.stackoverflowdaggersampleapp.rest.Resource.Companion.STATUS_SUCC
 import com.emon.stackoverflowdaggersampleapp.rest.RestRepository
 import com.emon.stackoverflowdaggersampleapp.view.dialog.DialogsNavigator
 import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigator
+import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigatorImpl
 import com.emon.stackoverflowdaggersampleapp.viewModel.QuestionViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

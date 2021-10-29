@@ -1,17 +1,22 @@
 package com.emon.stackoverflowdaggersampleapp.di
 
 import android.app.Activity
-import android.app.Application
 import androidx.fragment.app.FragmentManager
-import com.emon.stackoverflowdaggersampleapp.rest.RestRepository
 import com.emon.stackoverflowdaggersampleapp.view.dialog.DialogsNavigator
 import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigator
+import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigatorImpl
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
 @Module
-object ActivityModule {
+abstract class ActivityModule {
 
-    @Provides fun provideScreensNavigator(activity:Activity): ScreensNavigator = ScreensNavigator(activity)
-    @Provides fun provideDialogsNavigator(fragmentManager: FragmentManager): DialogsNavigator = DialogsNavigator(fragmentManager)
+    @ActivityScope
+    @Binds abstract fun bindScreensNavigator(screensNavigatorImpl: ScreensNavigatorImpl):ScreensNavigator
+
+    companion object {
+        @Provides fun provideDialogsNavigator(fragmentManager: FragmentManager): DialogsNavigator = DialogsNavigator(fragmentManager)
+    }
+
 }
