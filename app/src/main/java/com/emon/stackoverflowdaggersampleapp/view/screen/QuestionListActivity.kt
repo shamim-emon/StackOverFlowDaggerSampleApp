@@ -1,6 +1,7 @@
 package com.emon.stackoverflowdaggersampleapp.view.screen
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.databinding.DataBindingUtil
@@ -21,6 +22,7 @@ import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigatorImp
 import com.emon.stackoverflowdaggersampleapp.viewModel.QuestionViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Named
 
 class QuestionListActivity : BaseActivity(), ItemClickListener {
 
@@ -38,11 +40,22 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
     @Inject
     lateinit var screensNavigator: ScreensNavigator
 
+    @field:Named("t1")
+    @Inject lateinit var strOne:String
+
+    @field:Named("t2")
+    @Inject lateinit var strTwo:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_question_list)
 
+
+
         injector.inject(this)
+
+        Log.e("QualifierTest","$strOne  $strTwo")
+
         viewModel= QuestionViewModel(repository)
         viewModel.getQuestionListSchema().observe(this, Observer {
             when (it.status) {

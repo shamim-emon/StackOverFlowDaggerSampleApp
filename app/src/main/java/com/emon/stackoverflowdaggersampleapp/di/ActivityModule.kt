@@ -8,6 +8,7 @@ import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigatorImp
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 
 @Module
 abstract class ActivityModule {
@@ -17,6 +18,14 @@ abstract class ActivityModule {
 
     companion object {
         @Provides fun provideDialogsNavigator(fragmentManager: FragmentManager): DialogsNavigator = DialogsNavigator(fragmentManager)
+
+        @Provides
+        @Named("t1")
+        fun testStringOne()="One"
+
+        @Provides
+        @Named("t2")
+        fun testStringTwo()="Two"
     }
 
 }
