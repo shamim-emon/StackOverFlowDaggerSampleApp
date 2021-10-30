@@ -11,7 +11,7 @@ import dagger.Provides
 import javax.inject.Inject
 import javax.inject.Provider
 
-class QuestionViewModel(private val repository: RestRepository) : ViewModel() {
+class QuestionViewModel @Inject constructor(private val repository: RestRepository) : ViewModel() {
 
     private var questionListSchemaLiveData: MutableLiveData<Resource<List<Item>>> = MutableLiveData()
     private var questionDetailsSchemaLiveData: MutableLiveData<Resource<com.emon.stackoverflowdaggersampleapp.data.questionDetails.Item>> = MutableLiveData()
@@ -40,9 +40,9 @@ class QuestionViewModel(private val repository: RestRepository) : ViewModel() {
     }
 
 
-    class Factory @Inject constructor(private val repositoryProvider: Provider<RestRepository>):ViewModelProvider.Factory{
+    class Factory @Inject constructor(private val questionViewModelProvider: Provider<QuestionViewModel>):ViewModelProvider.Factory{
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return QuestionViewModel(repositoryProvider.get()) as T
+            return questionViewModelProvider.get() as T
         }
 
     }
