@@ -2,11 +2,16 @@ package com.emon.stackoverflowdaggersampleapp.viewModel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.emon.stackoverflowdaggersampleapp.data.questionList.Item
 import com.emon.stackoverflowdaggersampleapp.rest.Resource
 import com.emon.stackoverflowdaggersampleapp.rest.RestRepository
+import dagger.Provides
+import javax.inject.Inject
+import javax.inject.Provider
 
-class QuestionViewModel(val repository: RestRepository) {
+class QuestionViewModel(private val repository: RestRepository) : ViewModel() {
 
     private var questionListSchemaLiveData: MutableLiveData<Resource<List<Item>>> = MutableLiveData()
     private var questionDetailsSchemaLiveData: MutableLiveData<Resource<com.emon.stackoverflowdaggersampleapp.data.questionDetails.Item>> = MutableLiveData()
@@ -30,6 +35,14 @@ class QuestionViewModel(val repository: RestRepository) {
             questionDetailsSchemaLiveData.postValue(Resource.success(responseSchema!!.body()!!.items[0]))
         } catch (e: Exception) {
             questionDetailsSchemaLiveData.postValue(Resource.error(null))
+        }
+
+    }
+
+
+    class Factory @Inject constructor(private val repositoryProvider: Provider<RestRepository>):ViewModelProvider.Factory{
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return QuestionViewModel(repositoryProvider.get()) as T
         }
 
     }

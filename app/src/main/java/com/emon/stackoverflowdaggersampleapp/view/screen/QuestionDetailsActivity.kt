@@ -7,6 +7,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.emon.stackoverflowdaggersampleapp.R
 import com.emon.stackoverflowdaggersampleapp.base.BaseActivity
@@ -37,6 +38,8 @@ class QuestionDetailsActivity : BaseActivity() {
     @Inject
     lateinit var screensNavigator: ScreensNavigator
 
+    @Inject lateinit var viewmodelFactory:QuestionViewModel.Factory
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +49,7 @@ class QuestionDetailsActivity : BaseActivity() {
         injector.inject(this)
 
         questionId=intent.getStringExtra("question_id")!!
-        viewModel= QuestionViewModel(restRepository)
+        viewModel= ViewModelProvider(this,viewmodelFactory).get(QuestionViewModel::class.java)
         viewModel.getQuestionBody().observe(this, Observer {
             when(it.status){
                 STATUS_SUCCESS->{

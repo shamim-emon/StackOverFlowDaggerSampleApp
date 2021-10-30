@@ -26,6 +26,7 @@ abstract class ActivityModule {
         @Provides
         @Named("t2")
         fun testStringTwo()="Two"
+
     }
 
 }

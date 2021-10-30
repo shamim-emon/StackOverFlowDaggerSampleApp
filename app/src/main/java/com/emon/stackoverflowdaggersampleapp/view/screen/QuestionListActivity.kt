@@ -1,11 +1,11 @@
 package com.emon.stackoverflowdaggersampleapp.view.screen
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.emon.stackoverflowdaggersampleapp.R
@@ -18,7 +18,6 @@ import com.emon.stackoverflowdaggersampleapp.rest.RestRepository
 import com.emon.stackoverflowdaggersampleapp.view.adapter.QuestionListAdapter
 import com.emon.stackoverflowdaggersampleapp.view.dialog.DialogsNavigator
 import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigator
-import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigatorImpl
 import com.emon.stackoverflowdaggersampleapp.viewModel.QuestionViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -46,17 +45,18 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
     @field:Named("t2")
     @Inject lateinit var strTwo:String
 
+    @Inject lateinit var viewmodelFactory:QuestionViewModel.Factory
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_question_list)
 
 
-
         injector.inject(this)
 
-        Log.e("QualifierTest","$strOne  $strTwo")
-
-        viewModel= QuestionViewModel(repository)
+        viewModel= ViewModelProvider(this,viewmodelFactory).get(QuestionViewModel::class.java)
         viewModel.getQuestionListSchema().observe(this, Observer {
             when (it.status) {
                 STATUS_SUCCESS -> {
