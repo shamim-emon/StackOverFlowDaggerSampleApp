@@ -5,7 +5,7 @@ import com.emon.stackoverflowdaggersampleapp.view.screen.QuestionListActivity
 import dagger.Subcomponent
 
 @PresentationScope
-@Subcomponent
+@Subcomponent(modules = [ViewModelsModule::class])
 interface PresentationComponent {
 
     fun inject(activity:QuestionListActivity)
