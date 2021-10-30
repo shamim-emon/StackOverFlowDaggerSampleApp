@@ -20,6 +20,7 @@ import com.emon.stackoverflowdaggersampleapp.view.dialog.DialogsNavigator
 import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigator
 import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigatorImpl
 import com.emon.stackoverflowdaggersampleapp.viewModel.QuestionViewModel
+import com.emon.stackoverflowdaggersampleapp.viewModel.ViewModelFactory
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,7 +39,7 @@ class QuestionDetailsActivity : BaseActivity() {
     @Inject
     lateinit var screensNavigator: ScreensNavigator
 
-    @Inject lateinit var viewmodelFactory:QuestionViewModel.Factory
+    @Inject lateinit var viewmodelFactory:ViewModelFactory
 
 
 

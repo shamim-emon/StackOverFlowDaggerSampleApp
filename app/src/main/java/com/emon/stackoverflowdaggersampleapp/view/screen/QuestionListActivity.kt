@@ -19,6 +19,8 @@ import com.emon.stackoverflowdaggersampleapp.view.adapter.QuestionListAdapter
 import com.emon.stackoverflowdaggersampleapp.view.dialog.DialogsNavigator
 import com.emon.stackoverflowdaggersampleapp.view.navigation.ScreensNavigator
 import com.emon.stackoverflowdaggersampleapp.viewModel.QuestionViewModel
+import com.emon.stackoverflowdaggersampleapp.viewModel.ViewModelFactory
+import com.emon.stackoverflowdaggersampleapp.viewModel.ViewModelTwo
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
@@ -28,6 +30,7 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
     private lateinit var binding: ActivityQuestionListBinding
 
     private lateinit var viewModel: QuestionViewModel
+    private lateinit var viewModelTwo: ViewModelTwo
     @Inject
     lateinit var repository:RestRepository
 
@@ -45,7 +48,7 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
     @field:Named("t2")
     @Inject lateinit var strTwo:String
 
-    @Inject lateinit var viewmodelFactory:QuestionViewModel.Factory
+    @Inject lateinit var viewmodelFactory:ViewModelFactory
 
 
 
@@ -57,6 +60,7 @@ class QuestionListActivity : BaseActivity(), ItemClickListener {
         injector.inject(this)
 
         viewModel= ViewModelProvider(this,viewmodelFactory).get(QuestionViewModel::class.java)
+        viewModelTwo= ViewModelProvider(this,viewmodelFactory).get(ViewModelTwo::class.java)
         viewModel.getQuestionListSchema().observe(this, Observer {
             when (it.status) {
                 STATUS_SUCCESS -> {

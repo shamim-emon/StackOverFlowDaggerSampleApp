@@ -39,12 +39,4 @@ class QuestionViewModel @Inject constructor(private val repository: RestReposito
 
     }
 
-
-    class Factory @Inject constructor(private val questionViewModelProvider: Provider<QuestionViewModel>):ViewModelProvider.Factory{
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return questionViewModelProvider.get() as T
-        }
-
-    }
-
 }
